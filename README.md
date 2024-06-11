@@ -3,7 +3,8 @@ Simple logistic regression model using raw python and numpy.
 
 ## Logistic Regression in a nutshell.
 
-<img src="res/logisticregression.png"
-     alt="Image source: Tess Fernandez"\>
+![image](/res/logisticregression.jpg)
 
+{:.image-caption}
+*Image source: Tess Fernandez*
 
