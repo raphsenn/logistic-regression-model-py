@@ -1,4 +1,5 @@
 import numpy as np
+from act import sigmoid
 
 
 class LogisticRegression:
@@ -14,13 +15,22 @@ class LogisticRegression:
         self.max_iterations = max_iterations
 
     def forward(self, x: np.array) -> None:
-        pass
+        """ Forward propagation. """
+        self.Z1 = np.dot(x, self.W) + self.B
+        self.A1 = sigmoid(self.Z1)
 
-    def fit(self, X_train: np.array, y_train: np.array, batch_size: int=1) -> None:
-        pass
+    def backward(self, y: np.array) -> None:
+        """ Backpropagation. """
+        self.error = (y - self.A1) ** 2
 
+    def fit(self, X_train: np.array, y_train: np.array, batch_size: int=1, verbose: bool=False) -> None:
+        """ Fit the data. """ 
+        for epoch in range(self.max_iterations):
+            for i in range(0, len(X_train), batch_size):
+                self.forward(X_train[i:i+batch_size]) 
+                self.backward(y_train[i:i+batch_size])
 
 if __name__ == "__main__":
-    lr = LogisticRegression(2)
-    print(lr.W)
-    print(lr.B)
+    and_gate = LogisticRegression(2)
+    print(and_gate.W)
+    print(and_gate.B)
