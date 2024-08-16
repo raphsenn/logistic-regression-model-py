@@ -1,4 +1,4 @@
-from logistic_regression import LogisticRegression
+from src.logistic_regression import LogisticRegression
 import numpy as np
 
 
