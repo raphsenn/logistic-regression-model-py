@@ -1,16 +1,28 @@
+#!/usr/bin/env python3
+# Author: Raphael Senn
+
 import numpy as np
-from act import sigmoid, step
+
+
+# Sigmoid activation function.
+def sigmoid(X: np.array) -> np.array:
+    return 1.0 / (1.0 + np.exp(-X))
+
+
+# Unit-Step function.
+def step(x: np.array) -> np.array:
+    return np.heaviside(x - 0.5, 0)
 
 
 class LogisticRegression:
     def __init__(self, n_features: int, random_state: bool=True, learning_rate: float = 0.1, max_iterations: int = 1, d_type=np.float64):
         # Create weights and biases.
         if random_state:
-            self.W = np.random.rand(n_features)                     # n x 1
-            self.B = np.random.rand(1)                              # 1 x 1
+            self.W = np.random.rand(n_features, 1)                     # n x 1
+            self.B = np.random.rand(1, 1)                              # 1 x 1
         else:
-            self.W = np.zeros(n_features)                           # n x 1
-            self.B = np.zeros(1)                                    # 1 x 1
+            self.W = np.zeros((n_features, 1))                           # n x 1
+            self.B = np.zeros((1, 1))                                    # 1 x 1
 
         # Set learning rate and max iterations.
         self.learning_rate = learning_rate
@@ -38,7 +50,7 @@ class LogisticRegression:
 
     def predict(self, x: np.array) -> bool:
         self.forward(x)
-        return self.A
+        return step(self.A)
 
     def fit(self, X_train: np.array, y_train: np.array, batch_size: int=1, learning_rate:float=0.1,verbose: bool=False) -> None:
         """ Fit the data. """ 
@@ -49,15 +61,3 @@ class LogisticRegression:
             
             if verbose:
                 print(f"Epoch {epoch}, Loss {self.loss}")
-
-
-if __name__ == "__main__":
-    AND_Gate = LogisticRegression(2, max_iterations=10000, learning_rate=0.01)
-    X_train = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
-    y_train = np.array([0, 0, 0, 1])
-    AND_Gate.fit(X_train, y_train, batch_size=4)
-
-    print(AND_Gate.predict(np.array([0, 0])))
-    print(AND_Gate.predict(np.array([0, 1])))
-    print(AND_Gate.predict(np.array([1, 0])))
-    print(AND_Gate.predict(np.array([1, 1])))

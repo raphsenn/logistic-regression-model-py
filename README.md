@@ -3,16 +3,35 @@ Simple logistic regression model using raw python and numpy.
 
 ## Logistic Regression in a nutshell.
 
-<figure>
-  <img src="/res/logisticregressio.jpg" alt="Alt text">
-  <figcaption>Image source: Tess Fernandez</figcaption>
-</figure>
+![image](./res/logisticregressio.jpg)
 
-### Sigmoid function
-The *sigmoid function*, which is also known as the *standard logistic function* is defined as \sigma(x) = .
-The *sigmoid function* needs to satisfy three properties *P1 - P3*.
+### Forward propagation
+For one training example $x = (x_1, ..., x_n) $ of dimension n, the forward propgation is:
 
-Let  \sigma(x)  be the sigmoid function, it needs to satisfy.
-  * P1 \lim_{x \to -inf} \sigma(x) = 0, \lim_{x \to inf} \sigma(x) = 1, \lim_{x \to 0} \sigma(x) = 1/2
-  * 
-  
+$ z = dot(w, x) + b $
+
+$ a = sigmoid(z) $
+
+$ L = -(ylog(a) + (1-y)log(1-a)) $
+
+### Backpropagation
+Training the model means updating the weights and biases, W and b, using the gradient of the
+loss with respect to these parameters.
+
+At each step, we need to calcualate: 
+
+####  $ \frac{dL}{dw} $, $ \frac{dL}{db}$
+
+We can use the cain rule:
+
+#### Chain rule
+
+Let $u(x)$ and $v(x)$ be two function.
+
+We want the derivative of the product of u and v:
+
+$\frac{dvu}{dx} $ = $\frac{dv}{dx} u + \frac{du}{dx} $ v
+
+in another notation:
+
+$(v(x)*u(x))'$ = $v'(x) * u(x) + v(x) * u'(x)$
