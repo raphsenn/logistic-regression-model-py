@@ -2,6 +2,7 @@
 # Author: Raphael Senn
 
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 # Sigmoid activation function.
@@ -52,7 +53,7 @@ class LogisticRegression:
         self.forward(x)
         return step(self.A)
 
-    def fit(self, X_train: np.array, y_train: np.array, batch_size: int=1, learning_rate:float=0.1,verbose: bool=False) -> None:
+    def fit(self, X_train: np.array, y_train: np.array, batch_size: int=1, learning_rate:float=0.1,verbose: bool=False, plot: bool=False) -> None:
         """ Fit the data. """ 
         for epoch in range(self.max_iterations):
             for i in range(0, len(X_train), batch_size):
